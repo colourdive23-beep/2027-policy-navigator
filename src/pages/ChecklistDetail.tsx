@@ -7,6 +7,7 @@ import { matchOne } from '../lib/engine';
 import { loadProfile } from '../lib/storage';
 import { REQUIREMENT_LABEL, buildChecklist, progressOf, useProgramChecks, type CLItem, type CLStep } from '../lib/checklists';
 import { COVERAGE_LABEL } from './ChecklistIndex';
+import { SITE_NAME } from '../lib/site';
 
 function ItemRow({ item, checked, onToggle }: { item: CLItem; checked: boolean; onToggle: () => void }) {
   const [open, setOpen] = useState(false);
@@ -153,7 +154,9 @@ export default function ChecklistDetail() {
   return (
     <>
       <div className="print-only print-head">
-        <strong>정책자금 내비 2027 — {cl.meta.title}</strong>
+        <strong>
+          {SITE_NAME} — {cl.meta.title}
+        </strong>
         <span>출력일 {today}</span>
       </div>
 

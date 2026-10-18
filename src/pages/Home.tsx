@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ClipboardCheck, ListChecks, Search, ShieldCheck, Stethoscope } from 'lucide-react';
 import PhoneMockup from '../components/PhoneMockup';
 import Art from '../components/Art';
+import { SITE_NAME, SITE_NAME_LINE2 } from '../lib/site';
 import SectionHeader, { Mark } from '../components/SectionHeader';
 import { CountUp } from '../components/Charts';
 import guide from '../data/guide.json';
@@ -35,11 +36,18 @@ export default function Home() {
         <div className="container hero__inner">
           <div className="hero__copy">
             <span className="pill pill--white">2027 1인사업자 정책자금·지원금 가이드</span>
-            <h1 className="hero__title display">
-              <span className="display__key">나에게 맞는</span> 정책자금,
-              <br />
-              5분 만에 찾아보세요.
+            {/* 서비스 공식 명칭 (src/lib/site.ts) — 표지 제목처럼 "1인사업자"를 강조색으로 */}
+            <h1 className="hero__title display" aria-label={SITE_NAME}>
+              <span className="hero__line" aria-hidden>
+                <span className="display__key">1인사업자</span>를 위한
+              </span>
+              <span className="hero__line" aria-hidden>
+                {SITE_NAME_LINE2}
+              </span>
             </h1>
+            <p className="hero__lead">
+              <span className="nowrap">나에게 맞는 정책자금,</span> <span className="nowrap">5분 만에 찾아보세요.</span>
+            </p>
             <p className="hero__sub">직원 없는 사장님을 위한 정책자금·지원금 맞춤형 가이드</p>
             <Link to="/diagnosis" className="btn btn--white btn--lg">
               무료 자가진단 시작하기 <ArrowRight size={20} aria-hidden />
@@ -223,7 +231,7 @@ export default function Home() {
           <div className="book__copy" data-reveal>
             <p className="section-label">The book</p>
             <h2 className="section-title">
-              이 서비스는 <Mark>한 권의 책</Mark>에서 시작했습니다
+              {SITE_NAME_LINE2}는 <Mark>한 권의 책</Mark>에서 시작했습니다
             </h2>
             <p className="book__text">
               《2027 1인사업자를 위한 정책자금·지원금 가이드》는 직원 없이 혼자 일하는 사장님이 실제로 신청할 수 있는 대출, 보증, 지원금, 안전망만 골라, 각 제도마다

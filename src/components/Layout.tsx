@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import guide from '../data/guide.json';
 import { useReveal } from '../lib/useReveal';
+import { SITE_NAME, SITE_NAME_LINE1, SITE_NAME_LINE2 } from '../lib/site';
 
 const NAV = [
   { to: '/diagnosis', label: '자가진단' },
@@ -26,7 +27,8 @@ export function Logo() {
         <path d="M50 10l-3 6M56 17l-5 2" stroke="#241714" strokeWidth="3" strokeLinecap="round" />
       </svg>
       <span className="logo__text">
-        정책자금 내비<span className="logo__year">2027</span>
+        <span className="logo__line1">{SITE_NAME_LINE1}</span>
+        <span className="logo__line2">{SITE_NAME_LINE2}</span>
       </span>
     </span>
   );
@@ -42,7 +44,7 @@ function Header() {
   return (
     <header className="site-header no-print">
       <div className="container site-header__inner">
-        <Link to="/" className="site-header__brand" aria-label="정책자금 내비 2027 홈">
+        <Link to="/" className="site-header__brand" aria-label={`${SITE_NAME} 홈`}>
           <Logo />
         </Link>
         <nav className={`site-nav ${open ? 'is-open' : ''}`} aria-label="주요 메뉴">

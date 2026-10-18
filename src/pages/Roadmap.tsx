@@ -7,6 +7,7 @@ import { Mark } from '../components/SectionHeader';
 import guide from '../data/guide.json';
 import checklistLibrary from '../data/checklist-library.json';
 import { loadProfile } from '../lib/storage';
+import { SITE_NAME } from '../lib/site';
 import { useChecklistVersion } from '../lib/checklists';
 import { answerChips, financeChips } from '../lib/profileSummary';
 import {
@@ -187,7 +188,7 @@ export default function Roadmap() {
   return (
     <>
       <div className="print-only print-head">
-        <strong>정책자금 내비 2027 — 나의 추천 신청 트랙</strong>
+        <strong>{SITE_NAME} — 나의 추천 신청 트랙</strong>
         <span>출력일 {today}</span>
       </div>
 

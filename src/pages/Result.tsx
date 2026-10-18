@@ -9,6 +9,7 @@ import guide from '../data/guide.json';
 import { answerChips } from '../lib/profileSummary';
 import { alertsFor, evalCond, matchAll, statusLabel, statusRowId, toEvalProfile, topPicks } from '../lib/engine';
 import { loadProfile } from '../lib/storage';
+import { SITE_NAME } from '../lib/site';
 import type { CategoryId, Cond, Status } from '../types';
 
 const CATS = guide.categories as Record<CategoryId, { label: string }>;
@@ -65,7 +66,7 @@ export default function Result() {
   return (
     <>
       <div className="print-only print-head">
-        <strong>정책자금 내비 2027 — 자가진단 결과</strong>
+        <strong>{SITE_NAME} — 자가진단 결과</strong>
         <span>출력일 {today}</span>
       </div>
 
