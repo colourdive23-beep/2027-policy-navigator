@@ -6,6 +6,10 @@ React + TypeScript + Vite, 디자인 기준은 `디자인_방향_변경_프롬�
 표지 일러스트는 책 PDF 표지를 벡터 그대로 SVG로 변환해 요소별로 나눈 것입니다 (`src/assets/art/`, 사용은 `src/components/Art.tsx`).
 제목 글꼴 G마켓 산스는 jsDelivr 웹폰트로 불러옵니다.
 
+**공개 주소: https://colourdive23-beep.github.io/2027-policy-navigator/**
+
+`main` 브랜치에 push하면 GitHub Actions가 빌드해 위 주소에 자동 배포합니다 (보통 1분 안팎).
+
 ## 로컬 실행
 
 Node.js 20 이상이 필요합니다.
