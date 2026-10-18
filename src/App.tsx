@@ -9,6 +9,7 @@ import ChecklistIndex from './pages/ChecklistIndex';
 import ChecklistDetail from './pages/ChecklistDetail';
 import Changes from './pages/Changes';
 import NotFound from './pages/NotFound';
+import Roadmap from './pages/Roadmap';
 
 // GitHub Pages는 서버 라우팅을 지원하지 않으므로 HashRouter(#/경로)를 씁니다.
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="diagnosis" element={<Diagnosis />} />
           <Route path="result" element={<Result />} />
+          <Route path="roadmap" element={<Roadmap />} />
           <Route path="programs" element={<Programs />} />
           <Route path="programs/:id" element={<ProgramDetail />} />
           <Route path="checklist" element={<ChecklistIndex />} />

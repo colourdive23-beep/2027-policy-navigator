@@ -6,24 +6,13 @@ import Art from '../components/Art';
 import SectionHeader, { Mark } from '../components/SectionHeader';
 import { StatusBadge } from '../components/Badges';
 import guide from '../data/guide.json';
-import { REGIONS, labelOf } from '../data/questions';
+import { answerChips } from '../lib/profileSummary';
 import { alertsFor, evalCond, matchAll, statusLabel, statusRowId, toEvalProfile, topPicks } from '../lib/engine';
 import { loadProfile } from '../lib/storage';
-import type { CategoryId, Cond, Profile, Status } from '../types';
+import type { CategoryId, Cond, Status } from '../types';
 
 const CATS = guide.categories as Record<CategoryId, { label: string }>;
 
-function answerChips(p: Profile): string[] {
-  const out: string[] = [];
-  const status = { pre: '예비 창업자', freelancer: '등록 전 프리랜서', operating: '영업 중', suspended: '휴업 중', closed: '폐업·재창업 준비' };
-  if (p.bizStatus) out.push(status[p.bizStatus]);
-  if (p.bizAge && p.bizAge !== 'none') out.push(`업력 ${labelOf('bizAge', p.bizAge)}`);
-  if (p.industry) out.push(labelOf('industry', p.industry));
-  if (p.region) out.push(REGIONS.find((r) => r.value === p.region)?.label ?? p.region);
-  if (p.revenue && p.revenue !== 'unknown') out.push(`매출 ${labelOf('revenue', p.revenue)}`);
-  if (p.employees) out.push(p.employees === '0' ? '직원 없음' : `직원 ${labelOf('employees', p.employees)}`);
-  return out;
-}
 
 export default function Result() {
   const profile = useMemo(() => loadProfile(), []);
@@ -136,6 +125,9 @@ export default function Result() {
             )}
 
             <div className="summary-card__actions no-print">
+              <Link to="/roadmap" className="btn btn--primary">
+                나의 추천 신청 트랙 보기 <ArrowRight size={18} aria-hidden />
+              </Link>
               <button className="btn btn--secondary" onClick={() => window.print()}>
                 <Printer size={18} aria-hidden /> 인쇄하기
               </button>
@@ -266,9 +258,12 @@ export default function Result() {
           <div className="result-next no-print" data-reveal>
             <div>
               <p className="result-next__title">다음 단계: 신청 준비</p>
-              <p>추천받은 제도마다 자격·서류·신청 절차·최종 점검을 따로 체크할 수 있어요.</p>
+              <p>어떤 제도를 먼저 보고 무엇을 함께 준비할지 단계별 트랙으로 정리했어요. 제도마다 체크리스트로 준비할 수 있습니다.</p>
             </div>
-            <Link to="/checklist?recommended=1" className="btn btn--primary btn--lg">
+            <Link to="/roadmap" className="btn btn--primary btn--lg">
+              나의 추천 신청 트랙 보기 <ArrowRight size={20} aria-hidden />
+            </Link>
+            <Link to="/checklist?recommended=1" className="btn btn--secondary btn--lg">
               <ListChecks size={20} aria-hidden /> 체크리스트로 준비하기
             </Link>
           </div>

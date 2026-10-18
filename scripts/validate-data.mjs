@@ -128,6 +128,44 @@ for (const m of pcl) {
   itemCount += m.documents.length + m.items.length;
 }
 for (const p of programs) if (!clIds.has(p.id)) err(`program-checklists`, `제도 "${p.id}"의 체크리스트가 없습니다`);
+// ── 로드맵 규칙 ──
+const rm = load('roadmap-rules.json');
+const RM_FIELDS = ['lane', 'priorityReason', 'eligibilityStatus', 'applicationDeadline', 'prerequisitePrograms', 'prerequisiteConditions', 'parallelApplicationStatus', 'overlapRestrictions', 'estimatedPreparationSteps', 'sourceReference', 'verificationStatus'];
+for (const p of programs) if (!rm.programs[p.id]) err('roadmap-rules', `제도 "${p.id}"의 로드맵 규칙이 없습니다`);
+for (const [pid, r] of Object.entries(rm.programs)) {
+  const w = `roadmap-rules.programs.${pid}`;
+  if (!ids.has(pid)) err(w, '기존 정책 데이터에 없는 programId');
+  for (const f of RM_FIELDS) if (r[f] === undefined) err(w, `"${f}"가 없습니다`);
+  if (!rm.lanes[r.lane]) err(w, `없는 lane "${r.lane}"`);
+  if (!r.sourceReference?.startsWith('원고')) err(w, 'sourceReference 는 원고 출처여야 합니다');
+  if (!['manuscript', 'partial', 'announcement'].includes(r.verificationStatus)) err(w, 'verificationStatus 값 오류');
+  if (!['rolling', 'window', 'event', 'announcement'].includes(r.applicationDeadline?.type)) err(w, 'applicationDeadline.type 값 오류');
+  // 2027년 날짜를 만들어 넣지 않았는지 (참고 일정은 2026년 실제 일정만)
+  if (/2027|20\d\d-\d\d-\d\d/.test(r.applicationDeadline?.reference ?? '')) err(w, '2027년 일정은 공고 전이므로 날짜를 넣을 수 없습니다 (2026 참고 일정만)');
+  if (!['parallel', 'sequential', 'confirm'].includes(r.parallelApplicationStatus?.status)) err(w, 'parallelApplicationStatus.status 값 오류');
+  for (const p of r.prerequisitePrograms) {
+    if (!ids.has(p.programId)) err(w, `prerequisitePrograms: 없는 제도 "${p.programId}"`);
+    if (!['required', 'conditional'].includes(p.relation)) err(w, 'prerequisitePrograms.relation 값 오류');
+  }
+  for (const o of r.overlapRestrictions) if (!rm.overlapTypes[o.type]) err(w, `없는 중복 제한 유형 "${o.type}"`);
+  if (!r.overlapRestrictions.length) err(w, '중복 제한이 확인되지 않으면 "unverified" 로 표시해야 합니다');
+}
+for (const t of rm.trackTypes) {
+  checkCond(t.cond, `roadmap-rules.trackTypes.${t.id}`);
+  if (!t.source) err(`roadmap-rules.trackTypes.${t.id}`, 'source가 없습니다');
+}
+for (const u of rm.unlocks) {
+  if (!ids.has(u.programId)) err('roadmap-rules.unlocks', `없는 제도 "${u.programId}"`);
+  if (u.after && !ids.has(u.after)) err('roadmap-rules.unlocks', `없는 제도 "${u.after}"`);
+  const prog = programs.find((p) => p.id === u.programId);
+  const labels = (prog?.criteria ?? []).map((c) => c.label ?? common[c.ref]?.label);
+  for (const fc of u.failingCriteria ?? []) if (!labels.includes(fc)) err('roadmap-rules.unlocks', `"${u.programId}"에 "${fc}" 조건이 없습니다`);
+  if (!['conditional', 'post-registration'].includes(u.phase)) err('roadmap-rules.unlocks', `phase 값 오류 "${u.phase}"`);
+  if (!u.source) err('roadmap-rules.unlocks', `"${u.programId}" source가 없습니다`);
+}
+for (const fc of rm.blockerUnlock.failingCriteria) if (!Object.values(common).some((c) => c.label === fc)) err('roadmap-rules.blockerUnlock', `공통 조건에 "${fc}"가 없습니다`);
+for (const b of rm.basics) if (b.site && !lib.sites[b.site]) err('roadmap-rules.basics', `없는 site "${b.site}"`);
+
 const itemIds = { size: `${pcl.length}개 제도·라이브러리 ${Object.keys(lib.items).length}개 항목·제도별 ${itemCount}개` };
 
 const changes = load('changes2027.json');

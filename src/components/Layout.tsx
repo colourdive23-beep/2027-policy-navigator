@@ -6,6 +6,7 @@ import { useReveal } from '../lib/useReveal';
 
 const NAV = [
   { to: '/diagnosis', label: '자가진단' },
+  { to: '/roadmap', label: '추천 트랙' },
   { to: '/programs', label: '정책 탐색' },
   { to: '/checklist', label: '체크리스트' },
   { to: '/changes', label: '2027 변화' },

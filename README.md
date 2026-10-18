@@ -45,6 +45,7 @@ npm run preview    # → http://localhost:4173
 | `#/result` | 진단 결과 — 기본 조건 부합 / 추가 확인 필요 / 조건 미충족, 인쇄·PDF |
 | `#/programs` | 정책 탐색 (검색·유형·목적·확정/예정 필터) |
 | `#/programs/:id` | 제도 상세 (10항목 카드, 내 조건별 충족 여부, 공식 신청처) |
+| `#/roadmap` | 나의 추천 신청 트랙: 진단 결과로 만든 단계별 로드맵 (병행 갈래, 선행·조건부·중복수혜·공고 확인 관계, 체크리스트 진행률 연동, 인쇄·PDF) |
 | `#/checklist` | 제도별 체크리스트 목록 (검색·유형 필터·추천 제도만·준비 중인 제도만, 제도별 진행률) |
 | `#/checklist/:id` | 제도별 상세 체크리스트 5단계 (자격 → 서류 → 계획 → 절차 → 최종 점검), 제도별 저장, 인쇄·PDF |
 | `#/changes` | 2026 → 2027 정책 변화 |
@@ -61,6 +62,7 @@ npm run preview    # → http://localhost:4173
 | `common-rules.json` | 여러 제도가 함께 쓰는 조건 (체납·연체·소상공인 기준 등) |
 | `changes2027.json` | 2026/2027 예산 비교, 신설 사업, 공고 캘린더 |
 | `program-checklists.json` | 제도별 상세 체크리스트: programId(= programs.json의 id), 서류와 출처 상태, 신청 절차 유형(track), 제도 전용 항목 |
+| `roadmap-rules.json` | 추천 트랙 규칙: 제도별 priorityReason, applicationDeadline(2026 참고 일정만, 2027은 공고 확인), prerequisitePrograms·Conditions, parallelApplicationStatus, overlapRestrictions(유형 구분), estimatedPreparationSteps, sourceReference, verificationStatus / 트랙 유형 / 조건부 단계 / 순서 근거 |
 | `checklist-library.json` | 체크리스트 공통 항목(왜 필요한지·준비 방법·발급처·주의사항·원고 출처·공식 링크)과 절차 유형별 단계 구성 |
 | `guide.json` | 유형 이름, 3장 상태별 표·유형별 루트, 안내 문구 |
 
