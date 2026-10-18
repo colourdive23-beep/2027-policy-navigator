@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 표지 동전 일러스트를 단순화한 파비콘: 오렌지 바탕 + 잉크 외곽선 + 금색 동전 2개 -->
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#F57824" stroke="#241714" stroke-width="4"/>
+  <!-- 뒤 동전 (옆에서 본 두께) -->
+  <ellipse cx="42" cy="44" rx="14" ry="7.5" fill="#DEA63B" stroke="#241714" stroke-width="3"/>
+  <ellipse cx="42" cy="39" rx="14" ry="7.5" fill="#FFD10A" stroke="#241714" stroke-width="3"/>
+  <ellipse cx="42" cy="39" rx="8.5" ry="4.2" fill="#DEA63B" stroke="#241714" stroke-width="2"/>
+  <!-- 앞 동전 -->
+  <circle cx="25" cy="30" r="17" fill="#FFD10A" stroke="#241714" stroke-width="3.5"/>
+  <circle cx="25" cy="30" r="11" fill="#DEA63B" stroke="#241714" stroke-width="2.5"/>
+  <!-- 반짝임 -->
+  <path d="M50 10l-3 6M56 17l-5 2" stroke="#241714" stroke-width="3" stroke-linecap="round"/>
+</svg>

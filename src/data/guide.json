@@ -1,0 +1,63 @@
+{
+  "categories": {
+    "loan": { "label": "융자", "tone": "solid", "desc": "기관이 직접 또는 은행을 통해 빌려주는 돈" },
+    "guarantee": { "label": "보증", "tone": "pale", "desc": "담보 대신 보증서로 은행 대출" },
+    "microfinance": { "label": "서민금융", "tone": "pale", "desc": "신용이 낮거나 소득이 적은 사람을 위한 대출" },
+    "debt": { "label": "재기·채무조정", "tone": "pale", "desc": "빚을 정리하고 다시 시작하는 길" },
+    "grant": { "label": "지원금", "tone": "outline", "desc": "갚지 않는 사업화 자금 (경쟁 선발·정산 의무)" },
+    "support": { "label": "지원사업", "tone": "outline", "desc": "컨설팅·판로·교육·폐업 지원" },
+    "safety": { "label": "안전망", "tone": "outline", "desc": "퇴직금·실업급여·산재·건강검진 대비" }
+  },
+  "fiveMoneys": [
+    { "kind": "지원금", "repay": "갚지 않음", "who": "정부·지자체 (전담기관)", "core": "경쟁 선발, 정해진 용도로만 사용, 정산 의무", "example": "모두의 창업, 초기창업패키지" },
+    { "kind": "직접융자", "repay": "갚음", "who": "정부 기관이 직접", "core": "시중보다 낮은 금리, 거치기간", "example": "소진공 성장촉진·위기대응 자금" },
+    { "kind": "이차보전", "repay": "갚음", "who": "은행이 대출, 정부가 이자 일부 부담", "core": "은행 심사를 거침, 이자 지원 기간이 정해짐", "example": "2027 소진공 경영안정 계열" },
+    { "kind": "보증", "repay": "갚음", "who": "은행 (보증기관이 보증서 발급)", "core": "담보 대신 보증서, 보증료 발생", "example": "지역신보, 신보, 기보" },
+    { "kind": "공제·보험", "repay": "해당 없음", "who": "대표가 납입, 정부가 일부 지원", "core": "폐업·휴업·사고 때 받는 안전망", "example": "노란우산공제, 자영업자 고용보험" }
+  ],
+  "statusMatrix": {
+    "columns": ["창업지원금", "소진공 정책자금", "보증", "서민금융", "안전망"],
+    "rows": [
+      { "id": "pre", "label": "예비창업자 (등록 전)", "values": ["가능", "어려움", "조건부*", "조건부", "어려움"] },
+      { "id": "new", "label": "사업자등록 직후 (1년 미만)", "values": ["가능", "조건부", "조건부", "조건부", "가능"] },
+      { "id": "1to3", "label": "업력 1~3년", "values": ["가능", "가능", "가능", "조건부", "가능"] },
+      { "id": "3to7", "label": "업력 3~7년", "values": ["조건부", "가능", "가능", "조건부", "가능"] },
+      { "id": "gt7", "label": "업력 7년 이상", "values": ["어려움", "가능", "가능", "조건부", "가능"] },
+      { "id": "suspended", "label": "휴업 중", "values": ["어려움", "어려움", "어려움", "조건부", "조건부"] },
+      { "id": "closed", "label": "폐업·재창업 준비", "values": ["조건부", "조건부", "조건부", "조건부", "조건부"] }
+    ],
+    "footnote": "* 예비창업자의 보증은 신보·기보의 예비창업자 전용 보증을 뜻합니다. 전문자격증, 연구·기술 경력, 특허·디자인권 같은 요건을 갖춘 사람만 해당되고, 사업자등록 전에 상담을 시작해야 합니다."
+  },
+  "routes": [
+    { "id": "pre", "label": "창업 예정 (사업자등록 전)", "first": "모두의 창업", "next": "지자체 예비창업 지원, 창업 교육", "chapters": "8장, 10장", "cond": { "field": "bizStatus", "in": ["pre", "freelancer"] } },
+    { "id": "early", "label": "창업 3년 이내", "first": "초기창업패키지, 지역신보 보증", "next": "소진공 성장촉진 계열 자금", "chapters": "8장, 5장, 4장", "cond": { "all": [{ "field": "bizStatus", "in": ["operating"] }, { "field": "bizAge", "maxMonths": 36 }] } },
+    { "id": "operating", "label": "매출은 있는데 운영자금 부족", "first": "지역신보 보증부 대출, 소진공 경영안정 계열", "next": "신용보증기금", "chapters": "5장, 4장", "cond": { "all": [{ "field": "bizStatus", "in": ["operating"] }, { "field": "purposes", "has": "operating" }] } },
+    { "id": "high-interest", "label": "고금리 대출 보유", "first": "소진공 대환대출", "next": "서민금융 상품", "chapters": "4장, 6장", "cond": { "field": "highInterest", "in": ["yes"] } },
+    { "id": "low-credit", "label": "신용점수가 낮음", "first": "서민금융 상품, 신용 회복", "next": "소진공 직접 융자 중 취약 소상공인 대상 자금", "chapters": "6장, 4장", "cond": { "any": [{ "field": "credit", "in": ["lt595"] }, { "field": "vulnerable", "in": ["yes"] }] } },
+    { "id": "service", "label": "디자인·콘텐츠·교육 서비스업", "first": "지역신보 보증, 지자체 지원사업", "next": "소상공인 디지털 지원", "chapters": "5장, 10장, 9장", "cond": { "field": "industry", "in": ["knowledge-service"] } },
+    { "id": "goods", "label": "굿즈·공예·소량 제조", "first": "소상공인 생활문화 혁신지원", "next": "판로·온라인 진출 지원, 지역신보", "chapters": "9장, 5장", "cond": { "field": "industry", "in": ["goods-online", "manufacturing"] } },
+    { "id": "tech", "label": "기술·AI 사업자", "first": "초기창업패키지, 기술보증기금", "next": "중진공 창업기업 자금, 경력창업지원(고경력자)", "chapters": "8장, 5장, 7장", "cond": { "field": "industry", "in": ["tech"] } },
+    { "id": "restart", "label": "폐업 후 재도전", "first": "희망리턴패키지, 재도전성공패키지", "next": "재도전성공학교, 서민금융", "chapters": "9장, 8장, 6장", "cond": { "any": [{ "field": "bizStatus", "in": ["closed"] }, { "field": "flags", "has": "prior-closure" }] } }
+  ],
+  "purposeLabels": {
+    "operating": "당장 운영자금",
+    "refinance": "비싼 이자 줄이기",
+    "growth": "장비·판로 투자",
+    "crisis": "재해·위기 대응",
+    "new-product": "신제품·서비스 개발",
+    "idea": "아이디어 창업",
+    "online": "온라인 판로",
+    "restart": "폐업 정리·재도전",
+    "debt": "연체·빚 정리",
+    "safety": "안전망",
+    "digital": "디지털·AI 역량"
+  },
+  "portals": [
+    { "name": "기업마당", "url": "https://www.bizinfo.go.kr", "what": "중앙부처와 지자체 지원사업을 모아 보는 통합 포털" },
+    { "name": "K-Startup", "url": "https://www.k-startup.go.kr", "what": "창업지원사업 공고와 신청" },
+    { "name": "소상공인 24", "url": "https://www.sbiz24.kr", "what": "소상공인 지원사업 신청" },
+    { "name": "소상공인 정책자금", "url": "https://ols.semas.or.kr", "what": "소진공 정책자금 공고와 신청" },
+    { "name": "희망리턴패키지", "url": "https://hope.sbiz.or.kr", "what": "폐업·재기 지원" }
+  ],
+  "disclaimer": "이 서비스는 《2027 1인사업자를 위한 정책자금·지원금 가이드》 원고를 바탕으로 제도를 이해하고 비교하도록 돕는 안내 도구이며, 개별 금융·법률·세무 자문이 아닙니다. 판정은 원고에 적힌 조건과 응답만으로 계산한 참고 결과이고, 최종 자격은 각 기관의 심사로 결정됩니다. 책·서비스와 공고가 다를 때는 언제나 공고가 우선입니다."
+}

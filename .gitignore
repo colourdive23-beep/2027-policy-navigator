@@ -1,0 +1,10 @@
+node_modules
+dist
+*.local
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+
+# 원고 원본은 공개 저장소에 올리지 않습니다.
+*.docx
+*.pdf
