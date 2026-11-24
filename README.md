@@ -58,7 +58,7 @@ npm run preview    # → http://localhost:4173
 
 | 파일 | 내용 |
 |---|---|
-| `programs.json` | 제도 40개: 10항목 카드(`card`), 판정 조건(`criteria`), 추가 확인사항(`checks`), 신청처(`apply`) |
+| `programs.json` | 제도 44개: 10항목 카드(`card`), 판정 조건(`criteria`), 추가 확인사항(`checks`), 신청처(`apply`) |
 | `common-rules.json` | 여러 제도가 함께 쓰는 조건 (체납·연체·소상공인 기준 등) |
 | `changes2027.json` | 2026/2027 예산 비교, 신설 사업, 공고 캘린더 |
 | `program-checklists.json` | 제도별 상세 체크리스트: programId(= programs.json의 id), 서류와 출처 상태, 신청 절차 유형(track), 제도 전용 항목 |
@@ -68,7 +68,7 @@ npm run preview    # → http://localhost:4173
 
 ### 확정 / 예정 표시
 
-- 제도: `"basis": "announced"` = 확정(2026 공고 기준), `"proposal"` = 예정(2027 예산안)
+- 제도: `"basis": "announced"` = 확정(2026 공고 기준), `"proposal"` = 예정(2027 정부안)
 - 2027 공고가 나오면 해당 제도의 `card` 수치를 고치고 `basis`를 `"announced"`, `basisLabel`을 `"2027 공고 기준"`으로 바꿉니다.
 - `changes2027.json`의 `status2027`을 `"confirmed"`로 바꾸면 막대그래프의 사선 무늬(예정)가 실선(확정)으로 바뀝니다.
 - 세부 조건이 아직 없는 제도는 `"needsAnnouncement": true` 로 두면 최고 판정이 '추가 확인 필요'로 제한됩니다.

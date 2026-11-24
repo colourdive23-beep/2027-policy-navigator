@@ -10,8 +10,8 @@
   },
   "fiveMoneys": [
     { "kind": "지원금", "repay": "갚지 않음", "who": "정부·지자체 (전담기관)", "core": "경쟁 선발, 정해진 용도로만 사용, 정산 의무", "example": "모두의 창업, 초기창업패키지" },
-    { "kind": "직접융자", "repay": "갚음", "who": "정부 기관이 직접", "core": "시중보다 낮은 금리, 거치기간", "example": "소진공 성장촉진·위기대응 자금" },
-    { "kind": "이차보전", "repay": "갚음", "who": "은행이 대출, 정부가 이자 일부 부담", "core": "은행 심사를 거침, 이자 지원 기간이 정해짐", "example": "2027 소진공 경영안정 계열" },
+    { "kind": "직접융자", "repay": "갚음", "who": "정부 기관이 직접", "core": "시중보다 낮은 금리, 거치기간", "example": "소진공 성장촉진·경영안정·위기대응 자금" },
+    { "kind": "이차보전", "repay": "갚음", "who": "은행이 대출, 정부가 이자 일부 부담", "core": "은행 심사를 거침, 이자 지원 기간이 정해짐", "example": "2027 소진공 일반자금 (기존 일반경영안정자금)" },
     { "kind": "보증", "repay": "갚음", "who": "은행 (보증기관이 보증서 발급)", "core": "담보 대신 보증서, 보증료 발생", "example": "지역신보, 신보, 기보" },
     { "kind": "공제·보험", "repay": "해당 없음", "who": "대표가 납입, 정부가 일부 지원", "core": "폐업·휴업·사고 때 받는 안전망", "example": "노란우산공제, 자영업자 고용보험" }
   ],
@@ -31,9 +31,23 @@
   "routes": [
     { "id": "pre", "label": "창업 예정 (사업자등록 전)", "first": "모두의 창업", "next": "지자체 예비창업 지원, 창업 교육", "chapters": "8장, 10장", "cond": { "field": "bizStatus", "in": ["pre", "freelancer"] } },
     { "id": "early", "label": "창업 3년 이내", "first": "초기창업패키지, 지역신보 보증", "next": "소진공 성장촉진 계열 자금", "chapters": "8장, 5장, 4장", "cond": { "all": [{ "field": "bizStatus", "in": ["operating"] }, { "field": "bizAge", "maxMonths": 36 }] } },
-    { "id": "operating", "label": "매출은 있는데 운영자금 부족", "first": "지역신보 보증부 대출, 소진공 경영안정 계열", "next": "신용보증기금", "chapters": "5장, 4장", "cond": { "all": [{ "field": "bizStatus", "in": ["operating"] }, { "field": "purposes", "has": "operating" }] } },
+    {
+      "id": "youth",
+      "label": "창업 3년 이내 + 대표 만 39세 이하",
+      "first": "청년창업패키지(2027 신설), 중진공 청년전용창업자금",
+      "next": "초기창업패키지",
+      "chapters": "8장, 7장",
+      "cond": {
+        "all": [
+          { "field": "bizStatus", "in": ["operating", "pre"] },
+          { "field": "bizAge", "maxMonths": 36 },
+          { "field": "flags", "has": "youth" }
+        ]
+      }
+    },
+    { "id": "operating", "label": "매출은 있는데 운영자금 부족", "first": "지역신보 보증부 대출, 소진공 일반자금(2027 이차보전)·경영안정 계열", "next": "신용보증기금", "chapters": "5장, 4장", "cond": { "all": [{ "field": "bizStatus", "in": ["operating"] }, { "field": "purposes", "has": "operating" }] } },
     { "id": "high-interest", "label": "고금리 대출 보유", "first": "소진공 대환대출", "next": "서민금융 상품", "chapters": "4장, 6장", "cond": { "field": "highInterest", "in": ["yes"] } },
-    { "id": "low-credit", "label": "신용점수가 낮음", "first": "서민금융 상품, 신용 회복", "next": "소진공 직접 융자 중 취약 소상공인 대상 자금", "chapters": "6장, 4장", "cond": { "any": [{ "field": "credit", "in": ["lt595"] }, { "field": "vulnerable", "in": ["yes"] }] } },
+    { "id": "low-credit", "label": "신용점수가 낮음", "first": "서민금융 상품, 신용 회복", "next": "소진공 직접 융자 중 신용취약 소상공인 대상 자금", "chapters": "6장, 4장", "cond": { "any": [{ "field": "credit", "in": ["lt595"] }, { "field": "vulnerable", "in": ["yes"] }] } },
     { "id": "service", "label": "디자인·콘텐츠·교육 서비스업", "first": "지역신보 보증, 지자체 지원사업", "next": "소상공인 디지털 지원", "chapters": "5장, 10장, 9장", "cond": { "field": "industry", "in": ["knowledge-service"] } },
     { "id": "goods", "label": "굿즈·공예·소량 제조", "first": "소상공인 생활문화 혁신지원", "next": "판로·온라인 진출 지원, 지역신보", "chapters": "9장, 5장", "cond": { "field": "industry", "in": ["goods-online", "manufacturing"] } },
     { "id": "tech", "label": "기술·AI 사업자", "first": "초기창업패키지, 기술보증기금", "next": "중진공 창업기업 자금, 경력창업지원(고경력자)", "chapters": "8장, 5장, 7장", "cond": { "field": "industry", "in": ["tech"] } },
@@ -54,7 +68,9 @@
   },
   "portals": [
     { "name": "기업마당", "url": "https://www.bizinfo.go.kr", "what": "중앙부처와 지자체 지원사업을 모아 보는 통합 포털" },
+    { "name": "정부24 혜택알리미", "url": "https://www.gov.kr", "what": "개인·소상공인이 받을 수 있는 혜택 맞춤 조회" },
     { "name": "K-Startup", "url": "https://www.k-startup.go.kr", "what": "창업지원사업 공고와 신청" },
+    { "name": "모두의 창업", "url": "https://modoo.or.kr", "what": "아이디어 단계 창업 도전 (예비창업자, 다른 업종으로 새 창업)" },
     { "name": "소상공인 24", "url": "https://www.sbiz24.kr", "what": "소상공인 지원사업 신청" },
     { "name": "소상공인 정책자금", "url": "https://ols.semas.or.kr", "what": "소진공 정책자금 공고와 신청" },
     { "name": "희망리턴패키지", "url": "https://hope.sbiz.or.kr", "what": "폐업·재기 지원" }
