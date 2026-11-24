@@ -16,7 +16,7 @@ export default function ProgramCard({ program }: { program: Program }) {
         <CategoryBadge category={program.category} />
         {program.isNew2027 && <span className="pill pill--outline">2027 신설</span>}
         <span className="pcard__spacer" />
-        <BasisBadge basis={program.basis} label={program.basis === 'announced' ? '2026' : '예산안'} />
+        <BasisBadge basis={program.basis} label={program.basis === 'announced' ? '2026' : '정부안'} />
       </div>
       <h3 className="pcard__title">
         <Link to={`/programs/${program.id}`} className="pcard__link">

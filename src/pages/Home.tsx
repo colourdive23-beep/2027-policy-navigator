@@ -21,7 +21,7 @@ const NEEDS: { purpose: string; label: string; hint: string }[] = [
   { purpose: 'refinance', label: '비싼 이자 줄이기', hint: '대환대출 · 서민금융' },
   { purpose: 'new-product', label: '신제품·서비스 개발', hint: '초기·도약 패키지' },
   { purpose: 'idea', label: '아이디어만 있음', hint: '모두의 창업' },
-  { purpose: 'online', label: '온라인 판로', hint: 'TOPS → 상생성장촉진자금' },
+  { purpose: 'online', label: '온라인 판로', hint: 'TOPS → 상생성장지원자금' },
   { purpose: 'restart', label: '폐업·재도전', hint: '희망리턴 · 재도전 트랙' },
   { purpose: 'safety', label: '다치거나 쉴 때 대비', hint: '노란우산 · 고용·산재보험' },
   { purpose: 'growth', label: '장비·판로 투자', hint: '성장기반자금 · 기보' },
@@ -167,7 +167,7 @@ export default function Home() {
                 <p className="kpi-card__compare">
                   2026 {h.y2026.text} <span className="delta delta--up">▲ {h.delta.replace('+', '')}</span>
                 </p>
-                <span className="pill pill--outline">예정 · 예산안</span>
+                <span className="pill pill--outline">예정 · 정부안</span>
               </article>
               <article className="kpi-card" data-reveal style={{ transitionDelay: '80ms' }}>
                 <p className="kpi-card__label">소상공인 정책금융</p>
@@ -175,8 +175,8 @@ export default function Home() {
                   <CountUp value={2} />
                   <small>조 원 이차보전</small>
                 </p>
-                <p className="kpi-card__compare">직접 융자 중심 → 융자 2조 2,500억 원 + 이차보전 2조 원</p>
-                <span className="pill pill--outline">예정 · 예산안</span>
+                <p className="kpi-card__compare">직접 융자 중심(11개 자금) → 직접 융자 2조 2,500억 원(6개 자금) + 이차보전 2조 원</p>
+                <span className="pill pill--outline">예정 · 정부안</span>
               </article>
               <article className="kpi-card" data-reveal style={{ transitionDelay: '160ms' }}>
                 <p className="kpi-card__label">모두의 창업 선발 인원</p>
@@ -184,8 +184,8 @@ export default function Home() {
                   <CountUp value={20000} />
                   <small>명</small>
                 </p>
-                <p className="kpi-card__compare">2026 1만 5천 명 · 예비창업패키지는 통합</p>
-                <span className="pill pill--outline">예정 · 예산안</span>
+                <p className="kpi-card__compare">2026 1만 5천 명 · 3차·4차 각 1만 명</p>
+                <span className="pill pill--outline">예정 · 정부안</span>
               </article>
             </div>
             <div className="arch__cta">

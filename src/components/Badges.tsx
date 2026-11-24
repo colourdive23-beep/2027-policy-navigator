@@ -30,8 +30,8 @@ export function BasisBadge({ basis, label }: { basis: Basis; label?: string }) {
       <BadgeCheck size={13} aria-hidden /> 확정 · {label ?? '2026 공고'}
     </span>
   ) : (
-    <span className="pill pill--outline" title="2027 예산안 기준 — 국회 심의·공고 전">
-      <Clock size={13} aria-hidden /> 예정 · {label ?? '2027 예산안'}
+    <span className="pill pill--outline" title="2027 정부안 기준 — 국회 심의·공고 전">
+      <Clock size={13} aria-hidden /> 예정 · {label ?? '2027 정부안'}
     </span>
   );
 }

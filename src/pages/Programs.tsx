@@ -56,7 +56,7 @@ export default function Programs() {
               1인사업자가 실제로 신청할 수 있는 <Mark>{PROGRAMS.length}개 제도</Mark>
             </>
           }
-          aside="원고의 10항목 카드를 그대로 옮겼습니다. 카드의 숫자는 2026년 공고 기준 참고값이며, 2027년 예산안 사업은 '예정'으로 표시합니다."
+          aside="원고의 10항목 카드를 그대로 옮겼습니다. 카드의 숫자는 2026년 공고 기준 참고값이고 금리는 2026년 4분기(정책자금 기준금리 연 4.12%) 기준이며, 2027년 정부안 사업은 '예정'으로 표시합니다."
         />
 
         <div className="finder" data-reveal>
@@ -111,7 +111,7 @@ export default function Programs() {
               <select value={basis} onChange={(e) => set('basis', e.target.value)}>
                 <option value="all">전체</option>
                 <option value="announced">확정 (2026 공고)</option>
-                <option value="proposal">예정 (2027 예산안)</option>
+                <option value="proposal">예정 (2027 정부안)</option>
                 <option value="new">2027 신설</option>
               </select>
             </label>

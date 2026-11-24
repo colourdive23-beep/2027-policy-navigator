@@ -43,7 +43,7 @@ export default function Changes() {
               <span className="pill pill--outline">
                 <Clock size={13} aria-hidden /> 예정
               </span>
-              2027년 예산안 (국회 심의 전)
+              2027년 정부안 (국회 심의 중)
             </span>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function Changes() {
                 </div>
                 <p className="kpi-card__big">
                   {h.delta}
-                  <small> 증가 (예산안)</small>
+                  <small> 증가 (정부안)</small>
                 </p>
               </article>
               {changes.kpis.map((k, i) => (

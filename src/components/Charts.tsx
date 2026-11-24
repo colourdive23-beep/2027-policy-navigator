@@ -56,7 +56,7 @@ export function ChartLegend() {
         <i className="legend__sw legend__sw--2026" /> 2026 확정
       </span>
       <span>
-        <i className="legend__sw legend__sw--2027" /> 2027 예정(예산안)
+        <i className="legend__sw legend__sw--2027" /> 2027 예정(정부안)
       </span>
     </div>
   );
@@ -123,7 +123,7 @@ export function PairBars({ rows, unit, title }: { rows: PairRow[]; unit: string;
           <tr>
             <th>항목</th>
             <th>2026 (확정)</th>
-            <th>2027 (예산안, 예정)</th>
+            <th>2027 (정부안, 예정)</th>
           </tr>
         </thead>
         <tbody>
@@ -148,7 +148,7 @@ interface SingleRow {
   status2027: string;
 }
 
-/** 2027 신설 사업 예산안 (모두 예정 → 해칭) */
+/** 2027 신설 사업 정부안 (모두 예정 → 해칭) */
 export function SingleBars({ rows, unit, title }: { rows: SingleRow[]; unit: string; title: string }) {
   const max = Math.max(...rows.map((r) => r.value));
   return (
@@ -174,7 +174,7 @@ export function SingleBars({ rows, unit, title }: { rows: SingleRow[]; unit: str
           </div>
         ))}
       </div>
-      <p className="chart__unit">단위: {unit} · 사선 무늬 = 예정(예산안)</p>
+      <p className="chart__unit">단위: {unit} · 사선 무늬 = 예정(정부안)</p>
     </figure>
   );
 }

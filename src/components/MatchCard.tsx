@@ -18,7 +18,7 @@ export default function MatchCard({ match, featured }: Props) {
         <StatusBadge status={status} />
         <CategoryBadge category={p.category} />
         <span className="pcard__spacer" />
-        <BasisBadge basis={p.basis} label={p.basis === 'announced' ? '2026' : '예산안'} />
+        <BasisBadge basis={p.basis} label={p.basis === 'announced' ? '2026' : '정부안'} />
       </div>
 
       <h3 className="mcard__title">{p.name}</h3>

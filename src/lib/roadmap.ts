@@ -272,7 +272,7 @@ export function buildRoadmap(profile: Profile): Roadmap {
   if (condItems.length) phases.push({ id: 'conditional', title: '조건이 충족되면 이어서 검토', reasons: [REASONS.conditional], lanes: [{ id: 'growth', label: '앞 단계 결과에 따라', items: condItems }] });
 
   // STEP: 공고 확인 후 결정
-  if (announce.length) phases.push({ id: 'announcement', title: '2027 공고 확인 후 결정', reasons: [REASONS.announcement], lanes: [{ id: 'business', label: '2027 신설·예산안 사업', items: announce }] });
+  if (announce.length) phases.push({ id: 'announcement', title: '2027 공고 확인 후 결정', reasons: [REASONS.announcement], lanes: [{ id: 'business', label: '2027 신설·정부안 사업', items: announce }] });
 
   const numbered = phases.map((p, i) => ({ ...p, no: i + 1 }));
 

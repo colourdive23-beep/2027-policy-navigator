@@ -138,7 +138,7 @@ export type Criterion = ({ ref: string; soft?: boolean } | CriterionDef);
 
 export type CategoryId = 'loan' | 'guarantee' | 'microfinance' | 'debt' | 'grant' | 'support' | 'safety';
 export type SoloLevel = 'possible' | 'conditional' | 'difficult';
-/** announced: 2026년까지의 공고(확정) 기준 / proposal: 2027 예산안(국회 심의 전, 예정) */
+/** announced: 2026년까지의 공고(확정) 기준 / proposal: 2027 정부안(국회 심의 중, 예정) */
 export type Basis = 'announced' | 'proposal';
 
 export interface CardRow {
